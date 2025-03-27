@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>INST377 - Lab 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            transition: background-color 0.5s ease;
+        }
+
+        #pageTitle {
+            text-align: left;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .section {
+            border: 2px solid #333;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: purple;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        input {
+            flex-grow: 1;
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="pageTitle">INST377 - LAB 4</h1>
+
+    <div class="container">
+        <div id="alertSection" class="section">
+            <form id="alertForm" class="form-container">
+                <input type="text" id="nameInput" placeholder="Enter your name" required>
+                <button type="submit">Alert Me</button>
+            </form>
+        </div>
+
+        <div id="colorSection" class="section">
+            <button onclick="changePageColor()">Change Color</button>
+        </div>
+
+        <div id="textSection" class="section">
+            <form id="textValidationForm" class="form-container">
+                <input type="text" id="textInput" placeholder="Enter text">
+                <button type="submit">Validate Text</button>
+            </form>
+        </div>
+
+        <div id="addTextSection" class="section">
+            <button onclick="addTextToTitle()">Add Text</button>
+        </div>
+    </div>
+
+    <script>
+        // Alert Me Section
+        document.getElementById('alertForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('nameInput').value;
+            alert(`Hi ${name}!`);
+        });
+
+        // Change Color Section
+        let isBlue = true;
+        function changePageColor() {
+            const body = document.body;
+            body.style.backgroundColor = isBlue ? 'green' : 'blue';
+            isBlue = !isBlue;
+        }
+
+        // Text Tester Section
+        document.getElementById('textValidationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const textInput = document.getElementById('textInput').value;
+            const validation = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            
+            if (validation.test(textInput)) {
+                alert('Good job!');
+            } else {
+                alert('Nuh uh');
+            }
+        });
+
+        // Add Text Section
+        function addTextToTitle() {
+            const titleElement = document.getElementById('pageTitle');
+            if (!titleElement.textContent.includes('Add Text')) {
+                titleElement.textContent += ' Add Text';
+            }
+        }
+    </script>
+</body>
+</html>
